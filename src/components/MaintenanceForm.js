@@ -1,4 +1,7 @@
-import { useState } from 'react';
+// src/components/MaintenanceForm.js
+import { useState, useEffect } from 'react';
+import { FaSave } from 'react-icons/fa';
+import { getEquipments } from '../services/api';
 
 const MaintenanceForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -6,6 +9,19 @@ const MaintenanceForm = ({ onSubmit }) => {
     details: '',
     date: '',
   });
+  const [equipments, setEquipments] = useState([]);
+
+  useEffect(() => {
+    const fetchEquipments = async () => {
+      try {
+        const response = await getEquipments();
+        setEquipments(response.data);
+      } catch (error) {
+        console.error('Error fetching equipments:', error);
+      }
+    };
+    fetchEquipments();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,16 +33,22 @@ const MaintenanceForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="form-group">
       <div>
-        <label>Equipment ID:</label>
-        <input
-          type="number"
+        <label>Equipment:</label>
+        <select
           name="equipmentId"
           value={formData.equipmentId}
           onChange={handleChange}
           required
-        />
+        >
+          <option value="">Select an equipment</option>
+          {equipments.map((eq) => (
+            <option key={eq.id} value={eq.id}>
+              {eq.name} (ID: {eq.id})
+            </option>
+          ))}
+        </select>
       </div>
       <div>
         <label>Details:</label>
@@ -48,7 +70,9 @@ const MaintenanceForm = ({ onSubmit }) => {
           required
         />
       </div>
-      <button type="submit">Add Maintenance</button>
+      <button type="submit">
+        <FaSave /> Add Maintenance
+      </button>
     </form>
   );
 };

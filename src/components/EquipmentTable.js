@@ -1,7 +1,9 @@
 // src/components/EquipmentTable.js
+import { FaEdit, FaTrash } from 'react-icons/fa';
+
 const EquipmentTable = ({ equipments, onEdit, onDelete }) => {
   return (
-    <table>
+    <table className="table">
       <thead>
         <tr>
           <th>ID</th>
@@ -19,8 +21,12 @@ const EquipmentTable = ({ equipments, onEdit, onDelete }) => {
             <td>{equipment.type}</td>
             <td>{equipment.status}</td>
             <td>
-              <button onClick={() => onEdit(equipment)}>Edit</button>
-              <button onClick={() => onDelete(equipment.id)}>Delete</button>
+              <button className="edit" onClick={() => onEdit(equipment)}>
+                <FaEdit /> Edit
+              </button>
+              <button onClick={() => onDelete(equipment.id)}>
+                <FaTrash /> Delete
+              </button>
             </td>
           </tr>
         ))}

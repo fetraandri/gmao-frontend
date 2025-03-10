@@ -1,11 +1,17 @@
 // src/components/InterventionTable.js
-const InterventionTable = ({ interventions }) => {
+
+const InterventionTable = ({ interventions, equipments }) => {
+  const getEquipmentName = (id) => {
+    const equipment = equipments.find((eq) => eq.id === id);
+    return equipment ? equipment.name : 'Unknown';
+  };
+
   return (
-    <table>
+    <table className="table">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Equipment ID</th>
+          <th>Equipment</th>
           <th>Description</th>
           <th>Date</th>
         </tr>
@@ -14,7 +20,7 @@ const InterventionTable = ({ interventions }) => {
         {interventions.map((intervention) => (
           <tr key={intervention.id}>
             <td>{intervention.id}</td>
-            <td>{intervention.equipmentId}</td>
+            <td>{getEquipmentName(intervention.equipmentId)}</td>
             <td>{intervention.description}</td>
             <td>{new Date(intervention.date).toLocaleDateString()}</td>
           </tr>

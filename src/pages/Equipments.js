@@ -1,3 +1,4 @@
+// src/pages/Equipments.js
 import { useState, useEffect } from 'react';
 import EquipmentForm from '../components/EquipmentForm';
 import EquipmentTable from '../components/EquipmentTable';

@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Equipments from './pages/Equipments';
 import Interventions from './pages/Interventions';
 import Maintenance from './pages/Maintenance';
+import './App.css';
 
 const App = () => {
   return (

@@ -1,5 +1,6 @@
 // src/components/EquipmentForm.js
 import { useState } from 'react';
+import { FaSave } from 'react-icons/fa';
 
 const EquipmentForm = ({ onSubmit, initialData = {} }) => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const EquipmentForm = ({ onSubmit, initialData = {} }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="form-group">
       <div>
         <label>Name:</label>
         <input
@@ -49,7 +50,9 @@ const EquipmentForm = ({ onSubmit, initialData = {} }) => {
           required
         />
       </div>
-      <button type="submit">{initialData.id ? 'Update' : 'Add'} Equipment</button>
+      <button type="submit">
+        <FaSave /> {initialData.id ? 'Update' : 'Add'} Equipment
+      </button>
     </form>
   );
 };
