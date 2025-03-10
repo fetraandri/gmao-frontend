@@ -1,45 +1,59 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import EquipmentForm from '../components/EquipmentForm';
 import EquipmentTable from '../components/EquipmentTable';
-import { fetchEquipments, deleteEquipment } from '../services/api';
+import { getEquipments, createEquipment, updateEquipment, deleteEquipment } from '../services/api';
 
-function Equipments() {
+const Equipments = () => {
   const [equipments, setEquipments] = useState([]);
-
-  const loadEquipments = () => {
-    fetchEquipments()
-      .then(response => setEquipments(response.data))
-      .catch(error => console.error('Erreur lors du chargement des équipements:', error));
-  };
+  const [editingEquipment, setEditingEquipment] = useState(null);
 
   useEffect(() => {
-    loadEquipments();
+    fetchEquipments();
   }, []);
 
-  const handleDelete = (id) => {
-    console.log('Tentative de suppression de l’équipement ID:', id);
-    deleteEquipment(id)
-      .then(() => {
-        console.log('Suppression réussie');
-        loadEquipments();
-      })
-      .catch(error => {
-        console.error('Erreur lors de la suppression:', error);
-        if (error.response && (error.response.status === 404 || error.response.status === 500)) {
-          loadEquipments();
-        }
-      });
+  const fetchEquipments = async () => {
+    try {
+      const response = await getEquipments();
+      setEquipments(response.data);
+    } catch (error) {
+      console.error('Error fetching equipments:', error);
+    }
+  };
+
+  const handleSubmit = async (formData) => {
+    try {
+      if (editingEquipment) {
+        await updateEquipment(editingEquipment.id, formData);
+        setEditingEquipment(null);
+      } else {
+        await createEquipment(formData);
+      }
+      fetchEquipments();
+    } catch (error) {
+      console.error('Error submitting equipment:', error);
+    }
+  };
+
+  const handleEdit = (equipment) => {
+    setEditingEquipment(equipment);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteEquipment(id);
+      fetchEquipments();
+    } catch (error) {
+      console.error('Error deleting equipment:', error);
+    }
   };
 
   return (
     <div>
-      <h1>Équipements</h1>
-      <Link to="/equipments/new" style={{ marginBottom: '20px', display: 'inline-block' }}>
-        <button>Ajouter un équipement</button>
-      </Link>
-      <EquipmentTable equipments={equipments} onDelete={handleDelete} />
+      <h1>Equipments</h1>
+      <EquipmentForm onSubmit={handleSubmit} initialData={editingEquipment || {}} />
+      <EquipmentTable equipments={equipments} onEdit={handleEdit} onDelete={handleDelete} />
     </div>
   );
-}
+};
 
 export default Equipments;

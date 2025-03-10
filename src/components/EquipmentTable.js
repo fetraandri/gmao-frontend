@@ -1,30 +1,32 @@
-import React from 'react';
-
-function EquipmentTable({ equipments, onDelete }) {
+// src/components/EquipmentTable.js
+const EquipmentTable = ({ equipments, onEdit, onDelete }) => {
   return (
-    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+    <table>
       <thead>
-        <tr style={{ backgroundColor: '#f1f1f1' }}>
-          <th style={{ padding: '10px', border: '1px solid #ddd' }}>ID</th>
-          <th style={{ padding: '10px', border: '1px solid #ddd' }}>Nom</th>
-          <th style={{ padding: '10px', border: '1px solid #ddd' }}>Description</th>
-          <th style={{ padding: '10px', border: '1px solid #ddd' }}>Actions</th>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        {equipments.map(eq => (
-          <tr key={eq.id}>
-            <td style={{ padding: '10px', border: '1px solid #ddd' }}>{eq.id}</td>
-            <td style={{ padding: '10px', border: '1px solid #ddd' }}>{eq.name}</td>
-            <td style={{ padding: '10px', border: '1px solid #ddd' }}>{eq.description}</td>
-            <td style={{ padding: '10px', border: '1px solid #ddd' }}>
-              <button onClick={() => onDelete(eq.id)}>Supprimer</button>
+        {equipments.map((equipment) => (
+          <tr key={equipment.id}>
+            <td>{equipment.id}</td>
+            <td>{equipment.name}</td>
+            <td>{equipment.type}</td>
+            <td>{equipment.status}</td>
+            <td>
+              <button onClick={() => onEdit(equipment)}>Edit</button>
+              <button onClick={() => onDelete(equipment.id)}>Delete</button>
             </td>
           </tr>
         ))}
       </tbody>
     </table>
   );
-}
+};
 
 export default EquipmentTable;

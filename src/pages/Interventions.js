@@ -1,33 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import InterventionTable from '../components/InterventionTable';
+// src/pages/Interventions.js
+import { useState, useEffect } from 'react';
 import InterventionForm from '../components/InterventionForm';
-import { fetchInterventions } from '../services/api';
+import InterventionTable from '../components/InterventionTable';
+import { getInterventions, createIntervention } from '../services/api';
 
-function Interventions({ showForm = false }) {
+const Interventions = () => {
   const [interventions, setInterventions] = useState([]);
 
   useEffect(() => {
-    fetchInterventions()
-      .then(response => setInterventions(response.data))
-      .catch(error => console.error('Erreur lors du chargement des interventions:', error));
+    fetchInterventions();
   }, []);
+
+  const fetchInterventions = async () => {
+    try {
+      const response = await getInterventions();
+      setInterventions(response.data);
+    } catch (error) {
+      console.error('Error fetching interventions:', error);
+    }
+  };
+
+  const handleSubmit = async (formData) => {
+    try {
+      await createIntervention(formData);
+      fetchInterventions();
+    } catch (error) {
+      console.error('Error submitting intervention:', error);
+    }
+  };
 
   return (
     <div>
       <h1>Interventions</h1>
-      {!showForm && (
-        <Link to="/interventions/new" style={{ marginBottom: '20px', display: 'inline-block' }}>
-          <button>Ajouter une intervention</button>
-        </Link>
-      )}
-      {showForm ? (
-        <InterventionForm onSave={() => setInterventions([...interventions])} />
-      ) : (
-        <InterventionTable interventions={interventions} />
-      )}
+      <InterventionForm onSubmit={handleSubmit} />
+      <InterventionTable interventions={interventions} />
     </div>
   );
-}
+};
 
 export default Interventions;

@@ -1,13 +1,17 @@
+// src/services/api.js (dans GMAO-FRONTEND)
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api';
+const api = axios.create({
+  baseURL: 'http://localhost:3000/api', // URL de votre backend local
+});
 
-export const fetchEquipments = () => axios.get(`${API_URL}/equipments`);
-export const deleteEquipment = (id) => axios.delete(`${API_URL}/equipments/${id}`);
-export const saveEquipment = (equipment) => axios.post(`${API_URL}/equipments`, equipment);
-export const fetchInterventions = () => axios.get(`${API_URL}/interventions`);
-export const fetchEquipmentsForIntervention = () => axios.get(`${API_URL}/equipments/for-intervention`);
-export const saveIntervention = (intervention) => axios.post(`${API_URL}/interventions`, intervention);
-export const fetchMaintenances = () => axios.get(`${API_URL}/maintenances`); 
-export const saveMaintenance = (maintenance) => axios.post(`${API_URL}/maintenances`, maintenance); 
-export const deleteMaintenance = (id) => axios.delete(`${API_URL}/maintenances/${id}`);
+export const getEquipments = () => api.get('/equipments');
+export const createEquipment = (data) => api.post('/equipments', data);
+export const updateEquipment = (id, data) => api.put(`/equipments/${id}`, data);
+export const deleteEquipment = (id) => api.delete(`/equipments/${id}`);
+
+export const getInterventions = () => api.get('/interventions');
+export const createIntervention = (data) => api.post('/interventions', data);
+
+export const getMaintenances = () => api.get('/maintenance');
+export const createMaintenance = (data) => api.post('/maintenance', data);

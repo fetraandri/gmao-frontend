@@ -1,12 +1,10 @@
-import React from 'react';
-
-function Home() {
+const Home = () => {
   return (
     <div>
-      <h1>Bienvenue dans GMAO</h1>
-      <p>Gestion de la maintenance assistée par ordinateur pour vos équipements et interventions.</p>
+      <h1>Welcome to GMAO</h1>
+      <p>Use the navigation bar to manage equipments, interventions, and maintenance.</p>
     </div>
   );
-}
+};
 
 export default Home;

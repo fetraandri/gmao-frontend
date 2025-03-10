@@ -1,30 +1,27 @@
-import React from 'react';
-
-function InterventionTable({ interventions }) {
+// src/components/InterventionTable.js
+const InterventionTable = ({ interventions }) => {
   return (
-    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+    <table>
       <thead>
-        <tr style={{ backgroundColor: '#f1f1f1' }}>
-          <th style={{ padding: '10px', border: '1px solid #ddd' }}>ID</th>
-          <th style={{ padding: '10px', border: '1px solid #ddd' }}>Description</th>
-          <th style={{ padding: '10px', border: '1px solid #ddd' }}>Statut</th>
-          <th style={{ padding: '10px', border: '1px solid #ddd' }}>Équipement</th>
+        <tr>
+          <th>ID</th>
+          <th>Equipment ID</th>
+          <th>Description</th>
+          <th>Date</th>
         </tr>
       </thead>
       <tbody>
-        {interventions.map(intervention => (
+        {interventions.map((intervention) => (
           <tr key={intervention.id}>
-            <td style={{ padding: '10px', border: '1px solid #ddd' }}>{intervention.id}</td>
-            <td style={{ padding: '10px', border: '1px solid #ddd' }}>{intervention.description}</td>
-            <td style={{ padding: '10px', border: '1px solid #ddd' }}>{intervention.status}</td>
-            <td style={{ padding: '10px', border: '1px solid #ddd' }}>
-              {intervention.equipment ? intervention.equipment.name : 'Aucun'}
-            </td>
+            <td>{intervention.id}</td>
+            <td>{intervention.equipmentId}</td>
+            <td>{intervention.description}</td>
+            <td>{new Date(intervention.date).toLocaleDateString()}</td>
           </tr>
         ))}
       </tbody>
     </table>
   );
-}
+};
 
 export default InterventionTable;
