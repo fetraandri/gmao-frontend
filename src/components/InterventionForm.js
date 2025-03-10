@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { fetchEquipmentsForIntervention, saveIntervention } from '../services/api';
 
-function InterventionForm({ history }) {
+function InterventionForm({ onSave }) {
   const [formData, setFormData] = useState({
     description: '',
     status: 'En attente',
     equipment: { id: '' }
   });
   const [equipments, setEquipments] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/equipments/for-intervention')
+    fetchEquipmentsForIntervention()
       .then(response => setEquipments(response.data))
       .catch(error => console.error('Erreur lors du chargement des équipements:', error));
   }, []);
@@ -26,15 +28,18 @@ function InterventionForm({ history }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8080/api/interventions', formData)
-      .then(() => history.push('/interventions'))
+    saveIntervention(formData)
+      .then(() => {
+        if (onSave) onSave(); // Callback pour mettre à jour la liste si nécessaire
+        navigate('/interventions');
+      })
       .catch(error => console.error('Erreur lors de la sauvegarde:', error));
   };
 
   return (
     <div>
-      <h1>Ajouter une intervention</h1>
-      <form onSubmit={handleSubmit}>
+      <h2>Ajouter une intervention</h2>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px', maxWidth: '400px' }}>
         <label>Description :</label>
         <input
           type="text"
@@ -42,23 +47,33 @@ function InterventionForm({ history }) {
           value={formData.description}
           onChange={handleChange}
           required
-        /><br />
+          style={{ padding: '8px', borderRadius: '4px', border: '1px solid #ddd' }}
+        />
         <label>Statut :</label>
-        <select name="status" value={formData.status} onChange={handleChange}>
+        <select
+          name="status"
+          value={formData.status}
+          onChange={handleChange}
+          style={{ padding: '8px', borderRadius: '4px', border: '1px solid #ddd' }}
+        >
           <option value="En attente">En attente</option>
           <option value="En cours">En cours</option>
           <option value="Terminée">Terminée</option>
-        </select><br />
+        </select>
         <label>Équipement :</label>
-        <select name="equipment.id" value={formData.equipment.id} onChange={handleChange}>
+        <select
+          name="equipment.id"
+          value={formData.equipment.id}
+          onChange={handleChange}
+          style={{ padding: '8px', borderRadius: '4px', border: '1px solid #ddd' }}
+        >
           <option value="">-- Sélectionnez un équipement --</option>
           {equipments.map(eq => (
             <option key={eq.id} value={eq.id}>{eq.name}</option>
           ))}
-        </select><br />
+        </select>
         <button type="submit">Enregistrer</button>
       </form>
-      <a href="/interventions">Retour à la liste</a>
     </div>
   );
 }
