@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Equipments from './pages/Equipments';
 import Interventions from './pages/Interventions';
 import Maintenance from './pages/Maintenance';
+import Dashboard from './pages/Dashboard';
 import './App.css';
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/equipments" element={<Equipments />} />
           <Route path="/interventions" element={<Interventions />} />
           <Route path="/maintenance" element={<Maintenance />} />
+          <Route path="/dashboard" element={<Dashboard />} /> {/* Nouvelle route */}
         </Routes>
       </div>
     </Router>
