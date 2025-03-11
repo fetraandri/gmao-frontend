@@ -1,9 +1,9 @@
-// src/pages/Dashboard.js
 import { useState, useEffect } from 'react';
 import StatsCard from '../components/StatsCard';
-import { Pie } from 'react-chartjs-2'; 
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'; 
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { getEquipments, getInterventions, getMaintenances } from '../services/api';
+import { FaWrench, FaCheckCircle, FaTools, FaCheckSquare, FaCogs } from 'react-icons/fa'; // Import des icônes
 
 // Enregistrer les composants nécessaires pour Chart.js
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -16,7 +16,7 @@ const Dashboard = () => {
     equipmentsInInterventionTerminee: 0,
     totalEquipments: 0,
   });
-  const [chartData, setChartData] = useState(null); // Nouvel état pour le diagramme
+  const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -61,7 +61,6 @@ const Dashboard = () => {
         console.log('Calculated Stats:', newStats);
         setStats(newStats);
 
-        // Préparer les données pour le diagramme circulaire
         setChartData({
           labels: [
             'Maintenance En cours',
@@ -77,7 +76,7 @@ const Dashboard = () => {
                 newStats.equipmentsInInterventionEnCours,
                 newStats.equipmentsInInterventionTerminee,
               ],
-              backgroundColor: ['#3498db', '#2ecc71', '#e67e22', '#27ae60'], // Couleurs correspondantes
+              backgroundColor: ['#3498db', '#2ecc71', '#e67e22', '#27ae60'],
               borderColor: ['#fff'],
               borderWidth: 2,
             },
@@ -92,7 +91,6 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  // Options pour le diagramme
   const chartOptions = {
     responsive: true,
     plugins: {
@@ -123,26 +121,31 @@ const Dashboard = () => {
               title="Équipements en Maintenance (En cours)"
               value={stats.equipmentsInMaintenanceEnCours}
               color="#3498db"
+              icon={<FaWrench />}
             />
             <StatsCard
               title="Équipements en Maintenance (Terminée)"
               value={stats.equipmentsInMaintenanceTerminee}
               color="#2ecc71"
+              icon={<FaCheckCircle />}
             />
             <StatsCard
               title="Équipements en Intervention (En cours)"
               value={stats.equipmentsInInterventionEnCours}
               color="#e67e22"
+              icon={<FaTools />}
             />
             <StatsCard
               title="Équipements en Intervention (Terminée)"
               value={stats.equipmentsInInterventionTerminee}
               color="#27ae60"
+              icon={<FaCheckSquare />}
             />
             <StatsCard
               title="Total des Équipements"
               value={stats.totalEquipments}
               color="#2c3e50"
+              icon={<FaCogs />}
             />
           </div>
           {chartData && (

@@ -1,6 +1,4 @@
-/* src/styles/App.css */
 
-/* Style général pour les conteneurs */
 
 .container {
   padding: 2rem;
@@ -9,6 +7,11 @@
   background-color: #f9fbfd; /* Fond légèrement gris clair pour un look moderne */
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Ombre douce */
+}
+
+h1 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-align: center;
 }
 
 /* Style des formulaires */
@@ -48,7 +51,6 @@
   outline: none;
 }
 
-/* Style spécifique pour les select */
 .form-group select {
   appearance: none; /* Retire le style natif */
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2c3e50" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat right 0.75rem center;
@@ -203,6 +205,17 @@
 .stats-card:hover {
   transform: translateY(-5px); /* Effet de survol */
 }
+.stats-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacement entre icône et titre */
+}
+
+.stats-card-icon {
+  font-size: 1.2rem; /* Taille de l’icône */
+  color: #2c3e50; /* Couleur par défaut, peut être ajustée */
+}
+
 
 .stats-card h3 {
   font-family: 'Arial', sans-serif;
