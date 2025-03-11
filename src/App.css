@@ -5,58 +5,93 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  background-color: #f9fbfd; /* Fond légèrement gris clair pour un look moderne */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Ombre douce */
 }
 
 /* Style des formulaires */
 .form-group {
   margin-bottom: 1.5rem;
+  display: grid; /* Utilisation d'une grille pour un alignement propre */
+  grid-template-columns: 150px 1fr; /* Colonne fixe pour labels, flexible pour inputs */
+  gap: 1rem;
+  align-items: center;
 }
 
 .form-group label {
-  display: block;
   font-family: 'Arial', sans-serif;
   font-size: 1rem;
+  font-weight: 600; /* Plus de poids pour les labels */
   color: #2c3e50;
-  margin-bottom: 0.5rem;
+  text-align: right; /* Alignement à droite pour un look pro */
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
   width: 100%;
   padding: 0.75rem;
   font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #d1d9e6; /* Bordure plus douce */
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Légère ombre interne */
   box-sizing: border-box;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group select:focus {
   border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3); /* Effet de focus subtil */
   outline: none;
 }
 
+/* Style spécifique pour les select */
+.form-group select {
+  appearance: none; /* Retire le style natif */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2c3e50" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat right 0.75rem center;
+  background-size: 12px;
+  padding-right: 2rem; /* Espace pour la flèche */
+}
+
+/* Boutons du formulaire */
 .form-group button {
+  grid-column: 2 / 3; /* Positionnement dans la grille */
   background-color: #3498db;
   color: white;
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacement pour l'icône */
 }
 
 .form-group button:hover {
   background-color: #2980b9;
+  transform: translateY(-1px); /* Légère élévation au survol */
 }
 
-/* Style des tableaux */
+.form-group button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Style des tableaux (inchangé mais ajusté pour cohérence) */
 .table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
+  margin-top: 2rem;
   background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden; /* Coins arrondis pour les bordures */
 }
 
 .table th,
@@ -70,10 +105,13 @@
   background-color: #2c3e50;
   color: #ecf0f1;
   font-weight: 600;
+  text-transform: uppercase; /* Pour un look plus pro */
+  font-size: 0.9rem;
 }
 
 .table td {
   color: #2c3e50;
+  font-size: 0.95rem;
 }
 
 .table button {
@@ -84,11 +122,15 @@
   border-radius: 4px;
   cursor: pointer;
   margin-right: 0.5rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .table button:hover {
   background-color: #c0392b;
+  transform: translateY(-1px);
 }
 
 .table button.edit {
@@ -110,6 +152,19 @@
     padding: 1rem;
   }
 
+  .form-group {
+    grid-template-columns: 1fr; /* Empilement sur mobile */
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    text-align: left; /* Réalignement pour mobile */
+  }
+
+  .form-group button {
+    grid-column: 1 / 2; /* Réajustement pour mobile */
+  }
+
   .table th,
   .table td {
     padding: 0.75rem;
@@ -117,6 +172,7 @@
   }
 
   .form-group input,
+  .form-group select,
   .form-group button {
     font-size: 0.9rem;
   }

@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api', 
+  baseURL: 'http://localhost:3000/api', // URL de votre backend local
 });
 
 export const getEquipments = () => api.get('/equipments');
@@ -17,5 +17,7 @@ export const deleteIntervention = (id) => api.delete(`/interventions/${id}`);
 
 export const getMaintenances = () => api.get('/maintenance');
 export const createMaintenance = (data) => api.post('/maintenance', data);
+export const updateMaintenance = (id, data) => api.put(`/maintenance/${id}`, data);
+export const deleteMaintenance = (id) => api.delete(`/maintenance/${id}`);
 
 export default api;

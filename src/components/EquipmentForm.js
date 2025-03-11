@@ -18,41 +18,48 @@ const EquipmentForm = ({ onSubmit, initialData = {} }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form-group">
-      <div>
-        <label>Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Type:</label>
-        <input
-          type="text"
-          name="type"
-          value={formData.type}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Status:</label>
-        <input
-          type="text"
-          name="status"
-          value={formData.status}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button type="submit">
-        <FaSave /> {initialData.id ? 'Update' : 'Add'} Equipment
-      </button>
-    </form>
+    <div className="container">
+      <form onSubmit={handleSubmit} className="form-group-container">
+        <div className="form-group">
+          <label htmlFor="name">Name:</label>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="type">Type:</label>
+          <input
+            id="type"
+            type="text"
+            name="type"
+            value={formData.type}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="status">Status:</label>
+          <input
+            id="status"
+            type="text"
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <button type="submit">
+            <FaSave /> {initialData.id ? 'Update' : 'Add'} Equipment
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
