@@ -1,4 +1,3 @@
-// src/components/EquipmentForm.js
 import { useState } from 'react';
 import { FaSave } from 'react-icons/fa';
 

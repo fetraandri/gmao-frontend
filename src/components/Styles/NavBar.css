@@ -1,71 +1,72 @@
+/* styles/Navbar.css */
 
-.navbar {
-    background-color: #2391ff;
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  
-  /* Conteneur de la liste de navigation */
-  .navbar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  
-  /* Style des éléments de la liste */
-  .navbar li {
-    margin-right: 2rem;
-  }
-  
-  /* Style des liens */
-  .navbar a {
-    color: #ecf0f1; /* Couleur claire pour le texte */
-    text-decoration: none;
-    font-family: 'Arial', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    transition: color 0.3s ease, background-color 0.3s ease; /* Animation fluide */
-  }
-  
-  /* Effet au survol des liens */
-  .navbar a:hover {
-    color: #3498db; /* Bleu clair au survol */
-    background-color: #34495e; /* Fond légèrement plus clair */
-    border-radius: 4px;
-  }
-  
-  /* Style pour le lien actif (optionnel, à activer avec React Router) */
-  .navbar a.active {
-    color: #e74c3c; /* Rouge pour indiquer l'onglet actif */
-    font-weight: 600;
-  }
-  
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .navbar {
+nav {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333333;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  margin: 0 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+nav a:hover {
+  color: #007bff;
+  background-color: #f5f7fa;
+}
+
+nav a:active {
+  transform: translateY(1px);
+}
+
+/* Effet de soulignement animé */
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #007bff;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+nav a:hover::after {
+  width: 50%;
+}
+
+/* Style pour le lien actif */
+nav a.active {
+  color: #007bff;
+  font-weight: 600;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  nav {
       padding: 1rem;
-    }
-  
-    .navbar ul {
       flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .navbar li {
-      margin: 0.5rem 0;
-      width: 100%;
-    }
-  
-    .navbar a {
-      display: block;
-      padding: 0.75rem 1rem;
-      font-size: 1rem;
-    }
+      align-items: stretch;
   }
+
+  nav a {
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+  }
+}
