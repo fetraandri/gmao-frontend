@@ -8,7 +8,7 @@ const Home = () => {
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
-          <h1 className="hero-title">Optimisez Votre Maintenance avec GMAO Pro</h1>
+          <h3 className="hero-title">Optimisez Votre Maintenance avec GMAO Pro</h3>
           <p className="hero-subtitle">
             Une solution complète pour gérer vos équipements, planifier vos interventions et améliorer votre productivité.
           </p>
