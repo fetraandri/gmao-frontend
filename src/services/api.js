@@ -1,8 +1,10 @@
-// src/services/api.js (dans GMAO-FRONTEND)
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api', // URL de votre backend local
+  baseURL: 'https://gmao-backend.vercel.app/api',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 export const getEquipments = () => api.get('/equipments');
