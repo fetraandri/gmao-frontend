@@ -7,43 +7,67 @@ const MaintenanceTable = ({ maintenances, equipments, onEdit, onDelete }) => {
   };
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Equipment</th>
-          <th>Details</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {maintenances.length === 0 ? (
+    <div className="overflow-x-auto">
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-gray-50">
           <tr>
-            <td colSpan="6">Aucune maintenance trouvée</td>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              ID
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Equipment
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Details
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Date
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Status
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Actions
+            </th>
           </tr>
-        ) : (
-          maintenances.map((maintenance) => (
-            <tr key={maintenance.id}>
-              <td>{maintenance.id}</td>
-              <td>{getEquipmentName(maintenance.equipmentId)}</td>
-              <td>{maintenance.details}</td>
-              <td>{new Date(maintenance.date).toLocaleDateString()}</td>
-              <td>{maintenance.status}</td>
-              <td>
-                <button className="edit" onClick={() => onEdit(maintenance)}>
-                  <FaEdit /> Edit
-                </button>
-                <button onClick={() => onDelete(maintenance.id)}>
-                  <FaTrash /> Delete
-                </button>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {maintenances.length === 0 ? (
+            <tr>
+              <td colSpan="6" className="px-6 py-4 text-center text-gray-500">
+                Aucune maintenance trouvée
               </td>
             </tr>
-          ))
-        )}
-      </tbody>
-    </table>
+          ) : (
+            maintenances.map((maintenance) => (
+              <tr key={maintenance.id}>
+                <td className="px-6 py-4 whitespace-nowrap">{maintenance.id}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{getEquipmentName(maintenance.equipmentId)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{maintenance.details}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {new Date(maintenance.date).toLocaleDateString()}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">{maintenance.status}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <button
+                    className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mr-2"
+                    onClick={() => onEdit(maintenance)}
+                  >
+                    <FaEdit className="mr-1" /> Edit
+                  </button>
+                  <button
+                    className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                    onClick={() => onDelete(maintenance.id)}
+                  >
+                    <FaTrash className="mr-1" /> Delete
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

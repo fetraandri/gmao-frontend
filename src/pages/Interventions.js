@@ -40,7 +40,7 @@ const Interventions = () => {
       } else {
         await createIntervention(formData);
       }
-      await fetchData(); // Mise à jour des listes
+      await fetchData();
     } catch (error) {
       console.error('Error submitting intervention:', error);
     } finally {
@@ -57,7 +57,7 @@ const Interventions = () => {
       try {
         setLoading(true);
         await deleteIntervention(id);
-        await fetchData(); // Mise à jour des listes
+        await fetchData();
       } catch (error) {
         console.error('Error deleting intervention:', error);
       } finally {
@@ -71,15 +71,19 @@ const Interventions = () => {
     : interventions;
 
   return (
-    <div>
-      <h1>Interventions</h1>
-      {loading && <p>Chargement...</p>}
-      <div className="form-group">
-        <label>Filter by Equipment:</label>
+    <div className="max-w-7xl mx-auto p-6">
+      <h1 className="text-2xl font-bold text-gray-900 mb-6">Interventions</h1>
+      {loading && <p className="text-gray-500">Chargement...</p>}
+      <div className="mb-6">
+        <label htmlFor="equipment-filter" className="block text-sm font-medium text-gray-700">
+          Filter by Equipment:
+        </label>
         <select
+          id="equipment-filter"
           value={selectedEquipmentId}
           onChange={(e) => setSelectedEquipmentId(e.target.value)}
           disabled={loading}
+          className="mt-1 block w-full max-w-xs border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100"
         >
           <option value="">All</option>
           {equipments.map((eq) => (
