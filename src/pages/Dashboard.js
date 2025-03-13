@@ -3,9 +3,15 @@ import StatsCard from '../components/StatsCard';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { getEquipments, getInterventions, getMaintenances } from '../services/api';
-import { FaWrench, FaCheckCircle, FaTools, FaCheckSquare, FaCogs } from 'react-icons/fa'; // Import des icônes
+import {
+  FaWrench,
+  FaCheckCircle,
+  FaTools,
+  FaCheckSquare,
+  FaCogs,
+} from 'react-icons/fa';
 
-// Enregistrer les composants nécessaires pour Chart.js
+// Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Dashboard = () => {
@@ -110,13 +116,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Dashboard GMAO</h1>
+    <div className="min-h-screen bg-gray-50 p-6">
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Dashboard GMAO</h1>
       {loading ? (
-        <p>Chargement des données...</p>
+        <p className="text-center text-lg text-gray-600">Chargement des données...</p>
       ) : (
-        <>
-          <div className="stats-container">
+        <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <StatsCard
               title="Équipements en Maintenance (En cours)"
               value={stats.equipmentsInMaintenanceEnCours}
@@ -149,12 +155,14 @@ const Dashboard = () => {
             />
           </div>
           {chartData && (
-            <div className="chart-container">
-              <h2>Répartition des Équipements par Statut</h2>
-              <Pie data={chartData} options={chartOptions} />
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">Répartition des Équipements par Statut</h2>
+              <div className="w-full max-w-2xl mx-auto">
+                <Pie data={chartData} options={chartOptions} />
+              </div>
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );
