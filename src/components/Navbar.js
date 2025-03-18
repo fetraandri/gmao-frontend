@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo or Brand (optional placeholder) */}
           <div className="flex-shrink-0">
-            <span className="text-white font-bold text-xl">GMAO Pro</span>
+            <span className="text-white font-bold text-xl">GMAO Pro by Ma Toky</span>
           </div>
 
           {/* Hamburger Menu for Mobile */}
